@@ -57,3 +57,33 @@ def affiche():
 		print("{0}- {1}".format(i, elt))
 
 def isWin(joueur):
+    """Fonction determinant l'issue de la partie si le joueur a gagner ou pas"""
+    if cases["A1"] == joueur and cases["A2"] == joueur and cases["A3"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["B1"] == joueur and cases["B2"] == joueur and cases["B3"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["C1"] == joueur and cases["C2"] == joueur and cases["C3"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["A1"] == joueur and cases["B1"] == joueur and cases["C1"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["A2"] == joueur and cases["B2"] == joueur and cases["C2"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["A3"] == joueur and cases["B3"] == joueur and cases["C3"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["A1"] == joueur and cases["B2"] == joueur and cases["C3"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    elif cases["A3"] == joueur and cases["B2"] == joueur and cases["C1"] == joueur:
+	    print("Le joueur {0} a gagner !!".format(joueur))
+	    return True
+    if cases["A1"] != "*" and cases["A2"] != "*" and cases["A3"] != "*" and cases["B1"] != "*" and cases["B2"] != "*" and cases["B3"] != "*" and cases["C1"] != "*" and cases["C2"] != "*" and cases["C3"] != "*":
+	    print("match nul !!")
+	    return True
+
+    return False
