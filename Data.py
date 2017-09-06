@@ -13,8 +13,8 @@ cases = {
 	"C3" : "*"
 }
 
-mode = [
+modes = [
 	"1 vs 1 > local",
-	"1 vs 1 > reseau > bientôt",
-	"1 vs IA > bientôt"
+	"1 vs 1 > reseau",
+	"1 vs IA"
 ]
