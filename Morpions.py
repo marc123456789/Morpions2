@@ -1,73 +1,65 @@
-from MFonction import *
-from Data import *
-from os import *
-from time import * 
+import MFonction
+import Data
 
-modes = int()
+#-- Variable --#
+game = None
+j1 = None
+j2 = None
+canBegin = False
+#--------------#
 
-while True:
-    system("CLS")
-    affiche()
+MFonction.affiche()
 
-    modes = input(">")
+while game == None:
+
+    game = input("> ")
 
     try:
-        modes = int(modes)
+        game = int(game)
     except ValueError:
-        print("la valeur choisie n'est pas un chiffre")
-        continue
-    
-    if modes == 1:
-        print("vous avez choisi le mode : {0}".format(mode[0]))
-        break
-    elif modes == 2:
-        print("vous avez choisi le mode : {0}".format(mode[1]))
-        break
-    elif modes == 3:
-        print("vous avez choisi le mode : {0}".format(mode[2]))
-        break
-
-while True:
-    j1 = input("J1> X ou O : ")
-    j2 = input("J2> X ou O : ")
-
-    if j1 != "X" and j1 != "O" or j2 != "X" and j2 != "O":
+        game = None
         continue
 
-    elif j1 == j2 :
-        print("joueur 1 et 2 je peuvent pas être identique")
-        continue
+    try:
+        game = Data.modes[game-1]
+    except IndexError:
+        game = None
     else:
-        break
+        print("Vous avez choisie le mode de jeu : {0}".format(game))
 
-system("CLS")
-print("joueur 1 > {0}, joueur 2 > {1}".format(j1, j2))
-print("le jeu va commencer ...")
-sleep(2)
+if game == Data.modes[0]:
+    while j1 == None:
+        j1 = input("(j1) X ou O > ")
 
-while True:
-    system("CLS")
-    grille()
-    print("c'est je tour du joueur 1 ({0})".format(j1))
-    while True:
-        c = input(">")
-        if isFree(c.upper()):
-            place(c.upper(), j1)
-            break
-        else:
+        if j1 != "X" and j1 != "O":
+            j1 = None
             continue
-    system("CLS")
-    if isWin(j1):
+
+    while j2 == None:
+        j2 = input("(j2) X ou O > ")
+
+        if j2 != "X" and j2 != "O":
+            j2 = None
+            continue
+
+    if j1 == j2:
+        j1 = "X"
+        j2 = "O"
+        print("joueur 1 et 2 sont identique !")
+
+    print("joueur 1 - {0}, joueur 2 - {1}".format(j1, j2))
+    MFonction.grille()
+    canBegin = True
+else: 
+    print("Le mode de jeu ({0}) n'est pas encore disponnible !".format(game))   
+    canBegin = False
+
+
+
+while canBegin: 
+    MFonction.turn(j1)
+    if MFonction.isWin(j1):
         break
-    grille()
-    print("c'est je tour du joueur 2 ({0})".format(j2))
-    while True:
-        c = input(">")
-        if isFree(c.upper()):
-            place(c.upper(), j2)
-            break
-        else:
-            continue
-    system("CLS")
-    if isWin(j2):
+    MFonction.turn(j2)  
+    if MFonction.isWin(j1):
         break
