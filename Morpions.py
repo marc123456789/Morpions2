@@ -1,5 +1,6 @@
 import MFonction
 import Data
+import os
 
 #-- Variable --#
 game = None
@@ -57,9 +58,11 @@ else:
 
 
 while canBegin: 
-    MFonction.turn(j1)
+    MFonction.onTurn(j1)
     if MFonction.isWin(j1):
         break
-    MFonction.turn(j2)  
+    MFonction.onTurn(j2)  
     if MFonction.isWin(j1):
         break
+
+os.system("pause")

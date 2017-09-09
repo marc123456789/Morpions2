@@ -40,7 +40,7 @@ def caseInToId(case):
         if i+1 == case:
             return elt
 
-def turn(joueur):
+def onTurn(joueur):
 
 
     while True:
@@ -80,5 +80,11 @@ def isWin(joueur):
         if cases[(j[1], 0)] == cases[(j[1], 1)] == cases[(j[1], 2)] == joueur:
             print("Le joueur {0} a gagner la partie !".format(joueur))
             return True
-        
+    
+    if cases[(2, 0)] == cases[(1, 1)] == cases[(0, 2)] == joueur:
+        print("Le joueur {0} a gagner la partie !".format(joueur))
+        return True
+    if cases[(0, 0)] == cases[(1, 1)] == cases[(2, 2)] == joueur:
+        print("Le joueur {0} a gagner la partie !".format(joueur))
+        return True
     return False
