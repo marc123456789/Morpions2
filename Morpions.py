@@ -1,7 +1,6 @@
 import MFonction
 import Data
 
-
 #-- Variable --#
 game = None
 j1 = None
@@ -62,6 +61,7 @@ while canBegin:
     if MFonction.isWin(j1):
         break
     MFonction.onTurn(j2)  
-    if MFonction.isWin(j1):
+    if MFonction.isWin(j2):
         break
-input("Entrer une touche pour continuer...")
+
+input("Entrer une touche pour continuer...")
