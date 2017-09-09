@@ -24,9 +24,9 @@ def grille():
 	print("")
 	print(
 
-		cases["A1"],cases["A2"],cases["A3"],"\n",
-		cases["B1"],cases["B2"],cases["B3"],"\n",
-		cases["C1"],cases["C2"],cases["C3"], sep =""
+		cases[(0, 0)],cases[(1, 0)],cases[(2, 0)],"\n",
+		cases[(0, 1)],cases[(1, 1)],cases[(2, 1)],"\n",
+		cases[(0, 2)],cases[(1, 2)],cases[(2, 2)], sep =""
 
 		)
 	print("")
@@ -35,14 +35,26 @@ def snake_case(case, joueur):
     """A l'aide de l'id et du joueur passer en parametre, la fonction va placer le joueur dans le dictionnaire CASES""" 
     cases[case] = joueur
 
+def caseInToId(case):
+    for i, elt in enumerate(cases):
+        if i+1 == case:
+            return elt
 
 def turn(joueur):
 
 
     while True:
         j_turn = input("({0}) > ".format(joueur))
-        if isFree(j_turn.upper()):
-            snake_case(j_turn.upper(), joueur)
+
+        try:
+            j_turn = int(j_turn)
+        except ValueError:
+            continue
+        
+        j_turn = caseInToId(j_turn)
+
+        if isFree(j_turn):
+            snake_case(j_turn, joueur)
             grille()
             break
         else:
@@ -58,32 +70,15 @@ def affiche():
 
 def isWin(joueur):
     """Fonction determinant l'issue de la partie si le joueur a gagner ou pas"""
-    if cases["A1"] == joueur and cases["A2"] == joueur and cases["A3"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["B1"] == joueur and cases["B2"] == joueur and cases["B3"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["C1"] == joueur and cases["C2"] == joueur and cases["C3"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["A1"] == joueur and cases["B1"] == joueur and cases["C1"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["A2"] == joueur and cases["B2"] == joueur and cases["C2"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["A3"] == joueur and cases["B3"] == joueur and cases["C3"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["A1"] == joueur and cases["B2"] == joueur and cases["C3"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    elif cases["A3"] == joueur and cases["B2"] == joueur and cases["C1"] == joueur:
-	    print("Le joueur {0} a gagner !!".format(joueur))
-	    return True
-    if cases["A1"] != "*" and cases["A2"] != "*" and cases["A3"] != "*" and cases["B1"] != "*" and cases["B2"] != "*" and cases["B3"] != "*" and cases["C1"] != "*" and cases["C2"] != "*" and cases["C3"] != "*":
-	    print("match nul !!")
-	    return True
-
+    
+    for y in cases:
+        if cases[(0, y[1])] == cases[(1, y[1])] == cases[(2, y[1])] == joueur:
+            print("Le joueur {0} a gagner la partie !".format(joueur))
+            return True
+    
+    for j in cases:
+        if cases[(j[1], 0)] == cases[(j[1], 1)] == cases[(j[1], 2)] == joueur:
+            print("Le joueur {0} a gagner la partie !".format(joueur))
+            return True
+        
     return False
